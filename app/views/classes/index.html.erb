@@ -1,6 +1,7 @@
 <%#= javascript_pack_tag 'hello_vue' %>
 
-<% @class_list['classData'].each do |data| %>
+<% @class_list.each do |data| %>
   <p><%= data['classId'] %></p>
   <p><%= data['className'] %></p>
+  <p><%= @student_ids[data['classId']] %></p>
 <% end %>
