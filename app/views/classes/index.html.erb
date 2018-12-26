@@ -1,7 +1,304 @@
-<%#= javascript_pack_tag 'hello_vue' %>
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<% @class_list.each do |data| %>
-  <p><%= data['classId'] %></p>
-  <p><%= data['className'] %></p>
-  <p><%= @student_ids[data['classId']] %></p>
-<% end %>
+
+  <title>講義管理画面 | SAMS</title>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">SAMS 講義管理画面</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html">講義管理</a></li>
+        <li><a href="pages.html">各種申請</a></li>
+        <li><a href="posts.html">設定</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="index.html">ようこそ、 三木 光範 さん</a></li>
+        <li><a href="login.html">ログアウト</a></li>
+
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+<header id="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 講義管理画面 <small>SAMS</small></h1>
+      </div>
+    </div>
+  </div>
+</header>
+<br>
+
+<section id="breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li>お知らせ</li>
+      <br>
+      <li class="active">現在新しいお知らせはありません。</li>
+    </ol>
+  </div>
+</section>
+
+
+<section id="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="list-group">
+          <a href="index.html" class="list-group-item active main-color-bg" style="background: #095f59;"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            担当講義一覧 <span class="badge">3</span>
+          </a>
+          <a href="pages.html" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 課題提出<span class="badge">3</span></a>
+          <a href="posts.html" class="list-group-item"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 課題受理<span class="badge">126</span></a>
+          <a href="users.html" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 質問確認 <span class="badge">2</span></a>
+        </div>
+
+        <div class="well">
+          <h4>Disk Space Used</h4>
+          <div class="progress">
+            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              60%
+            </div>
+          </div>
+          <h4>Bandwidth Used</h4>
+          <div class="progress">
+            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+              40%
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Class List-->
+      <div class="col-md-9">
+      <div class="panel panel-default">
+        <div class="panel-heading"style="background-color: #095f59;">
+          <h3 class="panel-title">担当講義 一覧</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped table-hover">
+            <tr>
+              <th>講義名</th>
+              <th>講義ID</th>
+              <th>受講学生数</th>
+              <th>出欠データ<br>エクスポート</th>
+            </tr>
+
+            <% @class_list.each do |data| %>
+              <tr>
+                <td><%= data['className'] %></td>
+                <td><%= data['classId'] %></td>
+                <td><%= @student_ids[data['classId']].size %></td>
+                <td><span class="glyphicon glyphicon-export" aria-hidden="true"></span></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+      <!-- class overview-->
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background-color: #095f59;">
+          <h3 class="panel-title">担当講義情報</h3>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-3">
+            <div class="well dash-box">
+              <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 3</h2>
+              <h4>担当講義数</h4>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="well dash-box">
+              <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 2</h2>
+              <h4>今週の課題数</h4>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="well dash-box">
+              <h2><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>126</h2>
+              <h4>受理済み課題数</h4>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="well dash-box">
+              <h2><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> 2</h2>
+              <h4>受信した質問</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+</section>
+
+
+<footer id="footer">
+  <p>Copyright : Madhav Prasad<br>2017</p>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script src="dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<style>
+  body{
+    background: #f4f4f4;
+  }
+
+  .navbar{
+    min-height: 33px !important;
+    margin-bottom: 0;
+    border-radius: 0;
+
+  }
+  .navbar-nav> li>a, .navbar-brand{
+    padding-top: 6px !important;
+    padding-bottom: 0;
+    height: 33px;
+
+  }
+
+  .main-color-bg{
+    background-color: #095f59;
+    color: #ffffff !important;
+  }
+
+
+  /*Header */
+
+  #header{
+    background: #333333;
+    color: #ffffff;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+
+  #header .create{
+    padding-top: 20px;
+  }
+
+  .dash-box{
+    text-align: center;
+  }
+
+  #footer{
+    background: #333333;
+    color: #ffffff;
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+
+  }
+
+  .navbar-default {
+    background-color: #095f59;
+    border-color: #689a9b;
+  }
+  .navbar-default .navbar-brand {
+    color: #efee24;
+  }
+  .navbar-default .navbar-brand:hover,
+  .navbar-default .navbar-brand:focus {
+    color: #010800;
+  }
+  .navbar-default .navbar-text {
+    color: #efee24;
+  }
+  .navbar-default .navbar-nav > li > a {
+    color: #efee24;
+  }
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:focus {
+    color: #010800;
+  }
+  .navbar-default .navbar-nav > .active > a,
+  .navbar-default .navbar-nav > .active > a:hover,
+  .navbar-default .navbar-nav > .active > a:focus {
+    color: #010800;
+    background-color: #689a9b;
+  }
+  .navbar-default .navbar-nav > .open > a,
+  .navbar-default .navbar-nav > .open > a:hover,
+  .navbar-default .navbar-nav > .open > a:focus {
+    color: #010800;
+    background-color: #689a9b;
+  }
+  .navbar-default .navbar-toggle {
+    border-color: #689a9b;
+  }
+  .navbar-default .navbar-toggle:hover,
+  .navbar-default .navbar-toggle:focus {
+    background-color: #689a9b;
+  }
+  .navbar-default .navbar-toggle .icon-bar {
+    background-color: #efee24;
+  }
+  .navbar-default .navbar-collapse,
+  .navbar-default .navbar-form {
+    border-color: #efee24;
+  }
+  .navbar-default .navbar-link {
+    color: #efee24;
+  }
+  .navbar-default .navbar-link:hover {
+    color: #010800;
+  }
+
+  @media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+      color: #efee24;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+      color: #010800;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+      color: #010800;
+      background-color: #689a9b;
+    }
+  }
+
+  /*Breadcrumb*/
+
+  .breadcrumb{
+    background: #cccccc;
+    color: #333333;
+  }
+  .breadcrumb a{
+    color: #333333;
+  }
+
+  .panel-title {
+    color: #efee24;
+  }
+</style>
