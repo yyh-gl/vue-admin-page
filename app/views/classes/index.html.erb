@@ -110,7 +110,8 @@
                 <td><%= data['className'] %></td>
                 <td><%= data['classId'] %></td>
                 <td><%= @student_ids[data['classId']].size %></td>
-                <td><span class="glyphicon glyphicon-export" aria-hidden="true"></span></td>
+<!--                <td><a href="/Users/Y_h/Rails_work/sams-web-admin/storage/attendance_cprograming.csv" download="attendance-data"><span class="glyphicon glyphicon-export" aria-hidden="true"></span></a></td>-->
+                <td><button type="submit"><%= link_to content_tag(:i, '', class: 'glyphicon glyphicon-export'), 'attendance_cprograming.csv', download: 'attendance_cprograming.csv' %></button></td>
               </tr>
             <% end %>
           </table>

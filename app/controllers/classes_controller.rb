@@ -9,6 +9,13 @@ class ClassesController < ApplicationController
     end
   end
 
+  def export
+    file_name = 'attendance_cprograming.csv'
+    filepath = Rails.root.join('public', file_name)
+    stat = File::stat(filepath)
+    send_file(filepath, :filename => file_name, :length => stat.size)
+  end
+
   private
 
   def fetch_classes_by_prof_id(prof_id)
@@ -19,5 +26,4 @@ class ClassesController < ApplicationController
   def fetch_classes_by_class_id(class_id)
     send_request(ENV['REQ_CLASS_BY_CLASS_ID'], { class_id: class_id })
   end
-
 end
